@@ -7,14 +7,17 @@ services:
       - "80:80"
     links:
       - teamcity-server
+    restart: always
   teamcity-server:
     image: jetbrains/teamcity-server
     ports:
       - "8111:8111"
+    restart: always
   teamcity-agent:
     image: jetbrains/teamcity-agent
     links:
       - teamcity-server
     environment:
       - SERVER_URL=http://teamcity-server:8111
+    restart: always
 
