@@ -1,2 +1,2 @@
 #!/bin/bash
-docker-compose up --build --scale teamcity-agent=2 
+docker-compose up -d --build --scale teamcity-agent=2 
