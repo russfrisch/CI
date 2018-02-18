@@ -1,23 +1,17 @@
 version: "3"
 services:
-  web:
-    build: ./web
-    image: web:latest
-    ports:
-      - "80:80"
-    links:
-      - teamcity-server
-    restart: always
   teamcity-server:
     image: jetbrains/teamcity-server
     ports:
       - "8111:8111"
     restart: always
   teamcity-agent:
-    image: jetbrains/teamcity-agent
+    build: ./teamcity-agent
+    image: teamcity-agent:latest
     links:
       - teamcity-server
     environment:
       - SERVER_URL=http://teamcity-server:8111
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
     restart: always
-
