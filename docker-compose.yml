@@ -3,7 +3,7 @@ services:
   teamcity-server:
     image: jetbrains/teamcity-server
     ports:
-      - "8111:8111"
+      - 127.0.0.1:8111:8111
     restart: always
   teamcity-agent:
     build: ./teamcity-agent
@@ -14,4 +14,11 @@ services:
       - SERVER_URL=http://teamcity-server:8111
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+    restart: always
+  registry:
+    image: registry:2
+    ports:
+      - 127.0.0.1:5000:5000
+    volumes:
+      - ./data:/var/lib/registry
     restart: always
