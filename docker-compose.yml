@@ -1,5 +1,14 @@
 version: "3"
 services:
+  ssl-proxy:
+    build: ./ssl-proxy
+    image: ssl-proxy:latest
+    extra_hosts:
+      - "dockerhost:172.17.0.1"
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
   teamcity-server:
     image: jetbrains/teamcity-server
     ports:
