@@ -10,7 +10,7 @@ if [ -z "$CERTBOT_EMAIL" ]; then
 fi
 
 exit_code=0
-set -x
+#set -x
 # Loop over every domain we can find
 for domain in $(parse_domains); do
     if ! get_certificate $domain $CERTBOT_EMAIL; then
@@ -24,7 +24,8 @@ done
 auto_enable_configs
 
 # Finally, tell nginx to reload the configs
-kill -HUP $NGINX_PID
+#kill -HUP $NGINX_PID
+nginx -s reload
 
-set +x
+#set +x
 exit $exit_code
