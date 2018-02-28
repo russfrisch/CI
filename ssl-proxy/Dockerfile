@@ -4,7 +4,8 @@ VOLUME /etc/letsencrypt
 EXPOSE 80
 EXPOSE 443
 
-RUN apk add --no-cache certbot
+RUN apk add --no-cache certbot && \
+    openssl dhparam -out /etc/letsencrypt/ssl-dhparams.pem 4096
 
 COPY ./crontab /etc/cron.d/certbot
 RUN crontab /etc/cron.d/certbot
