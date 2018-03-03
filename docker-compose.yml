@@ -3,8 +3,7 @@ services:
   ssl-proxy:
     build: ./ssl-proxy
     image: ssl-proxy:latest
-    extra_hosts:
-      - "dockerhost:172.17.0.1"
+    network_mode: "host"
     restart: always
     environment:
       - CERTBOT_EMAIL=russ.frisch@gmail.com
